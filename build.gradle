@@ -1,6 +1,7 @@
 plugins {
 	id 'java'
 	id 'java-library'
+	id "io.freefair.lombok" version "5.0.0-rc6"
 }
 
 group = 'com.bncrypted'
@@ -12,7 +13,12 @@ repositories {
 }
 
 dependencies {
+	compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
+
 	implementation 'org.springframework.boot:spring-boot-starter-security:2.2.5.RELEASE'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.3'
+	implementation 'org.apache.httpcomponents:httpclient:4.5.12'
+	implementation 'com.google.guava:guava:28.2-jre'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.2.5.RELEASE'
 }
