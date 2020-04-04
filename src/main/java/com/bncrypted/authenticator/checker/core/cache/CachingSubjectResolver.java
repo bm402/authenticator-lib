@@ -7,7 +7,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
+import java.util.concurrent.TimeUnit;
 
 public class CachingSubjectResolver<T extends Subject> implements SubjectResolver<T> {
 
@@ -21,11 +21,12 @@ public class CachingSubjectResolver<T extends Subject> implements SubjectResolve
         this.subjectCache = CacheBuilder.newBuilder()
                 .maximumSize(maximumSize)
                 .ticker(ticker)
-                .expireAfterWrite(ttlInSeconds, SECONDS)
+                .expireAfterWrite(ttlInSeconds, TimeUnit.SECONDS)
                 .build(CacheLoader.from(delegate::getTokenDetails));
     }
 
     public T getTokenDetails(String token) {
         return subjectCache.getUnchecked(token);
     }
+
 }

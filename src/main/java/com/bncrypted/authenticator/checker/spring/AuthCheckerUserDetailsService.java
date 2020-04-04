@@ -15,4 +15,5 @@ public class AuthCheckerUserDetailsService implements
         return new com.bncrypted.authenticator.checker.spring.user.UserDetails(
                 user.getPrincipal(), String.valueOf(token.getCredentials()), user.getRoles());
     }
+
 }
