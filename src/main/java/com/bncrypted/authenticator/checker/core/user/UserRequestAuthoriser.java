@@ -58,7 +58,7 @@ public class UserRequestAuthoriser<T extends User> implements RequestAuthoriser<
         }
     }
 
-    private void verifyRequestUserId(String requestUserId, User authenticatedUser) throws UnauthorisedUserException {
+    private void verifyRequestUserId(String requestUserId, User authenticatedUser) {
         if (!requestUserId.equals(authenticatedUser.getPrincipal())) {
             throw new UnauthorisedUserException();
         }

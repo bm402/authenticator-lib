@@ -21,7 +21,7 @@ public class UserTokenParserConfiguration {
 
     @Bean
     public UserTokenParser<UserTokenDetails> userTokenParser(HttpClient userTokenParserHttpClient,
-                                                             @Value("${auth.api.baseUrl}") String baseUrl) {
+                                                             @Value("${authenticator.api.base-url}") String baseUrl) {
 
         return new HttpClientBasedUserTokenParser<>(userTokenParserHttpClient, baseUrl, UserTokenDetails.class);
     }
