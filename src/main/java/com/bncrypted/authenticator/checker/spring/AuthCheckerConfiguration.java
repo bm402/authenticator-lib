@@ -26,7 +26,7 @@ import java.util.function.Function;
 public class AuthCheckerConfiguration {
 
     @Bean
-    @ConfigurationProperties("auth.checker.cache")
+    @ConfigurationProperties("authenticator.lib.cache")
     public CacheProperties cacheProperties() {
         return new CacheProperties();
     }
