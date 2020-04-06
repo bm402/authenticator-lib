@@ -1,5 +1,6 @@
 package com.bncrypted.authenticator.checker.spring;
 
+import com.bncrypted.authenticator.checker.core.RequestAuthoriser;
 import com.bncrypted.authenticator.checker.core.SubjectResolver;
 import com.bncrypted.authenticator.checker.core.cache.CachingSubjectResolver;
 import com.bncrypted.authenticator.checker.core.model.User;
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider;
@@ -22,6 +24,7 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.function.Function;
 
+@Lazy
 @Configuration
 public class AuthCheckerConfiguration {
 
@@ -42,9 +45,9 @@ public class AuthCheckerConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(name = "userRequestAuthoriser")
-    public UserRequestAuthoriser userRequestAuthoriser(SubjectResolver<User> userResolver,
-                                                       Function<HttpServletRequest, Optional<String>> userIdExtractor,
-                                                       Function<HttpServletRequest, Collection<String>> authorizedRolesExtractor) {
+    public RequestAuthoriser<User> userRequestAuthoriser(SubjectResolver<User> userResolver,
+                                                         Function<HttpServletRequest, Optional<String>> userIdExtractor,
+                                                         Function<HttpServletRequest, Collection<String>> authorizedRolesExtractor) {
         return new UserRequestAuthoriser<>(userResolver, userIdExtractor, authorizedRolesExtractor);
     }
 

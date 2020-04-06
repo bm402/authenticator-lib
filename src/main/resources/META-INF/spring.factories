@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.bncrypted.authenticator.checker.spring.AuthCheckerConfiguration,\
+com.bncrypted.authenticator.parser.spring.user.UserTokenParserConfiguration

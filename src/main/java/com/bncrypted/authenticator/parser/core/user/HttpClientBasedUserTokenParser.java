@@ -33,6 +33,7 @@ public class HttpClientBasedUserTokenParser<T> implements UserTokenParser<T> {
 
         try {
             HttpPost request = new HttpPost(baseUrl + "/verify");
+            request.setHeader("Content-Type", "application/json");
             request.setEntity(new StringEntity(tokenCredentials.toJsonString()));
 
             return httpClient.execute(request, httpResponse -> {

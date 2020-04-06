@@ -43,8 +43,7 @@ public class UserTokenTestApplication {
     }
 
     @Configuration
-    @EnableWebSecurity
-    public class AuthCheckerTestConfiguration extends AuthCheckerConfiguration {
+    public class AuthCheckerTestConfiguration {
 
         @Bean
         public Function<HttpServletRequest, Optional<String>> userIdExtractor() {
