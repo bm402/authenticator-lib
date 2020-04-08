@@ -3,6 +3,7 @@ package com.bncrypted.authenticator.checker.core.cache;
 import com.bncrypted.authenticator.checker.core.SubjectResolver;
 import com.bncrypted.authenticator.checker.core.model.Subject;
 import com.bncrypted.authenticator.checker.core.model.User;
+import com.bncrypted.authenticator.parser.core.user.exception.UserTokenInvalidException;
 import com.google.common.collect.ImmutableSet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.UUID;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -87,6 +89,14 @@ public class CachingSubjectResolverTest {
 
         cachingSubjectResolver.getTokenDetails(token);
         verify(mockDelegate, times(2)).getTokenDetails(token);
+    }
+
+    @Test
+    void whenDelegateThrowsUserTokenException_thenExceptionShouldBeBubbled() {
+        when(mockDelegate.getTokenDetails(anyString())).thenThrow(new UserTokenInvalidException());
+        CachingSubjectResolver cachingSubjectResolver = new CachingSubjectResolver<>(mockDelegate, 5, 2);
+
+        assertThrows(UserTokenInvalidException.class, () -> cachingSubjectResolver.getTokenDetails(token));
     }
 
 }
