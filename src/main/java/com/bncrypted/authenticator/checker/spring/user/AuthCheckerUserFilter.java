@@ -28,7 +28,7 @@ public class AuthCheckerUserFilter<T extends User> extends AbstractPreAuthentica
     private T authoriseUser(HttpServletRequest request) {
         try {
             return userRequestAuthoriser.authorise(request);
-        } catch (AuthCheckerException | UserTokenException ex) {
+        } catch (AuthCheckerException ex) {
             return null;
         }
     }

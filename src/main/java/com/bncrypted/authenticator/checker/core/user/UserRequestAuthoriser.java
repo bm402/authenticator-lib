@@ -7,8 +7,7 @@ import com.bncrypted.authenticator.checker.core.exception.BearerTokenMissingExce
 import com.bncrypted.authenticator.checker.core.exception.UnauthorisedRoleException;
 import com.bncrypted.authenticator.checker.core.exception.UnauthorisedUserException;
 import com.bncrypted.authenticator.checker.core.model.User;
-import com.bncrypted.authenticator.parser.core.user.exception.UserTokenInvalidException;
-import com.bncrypted.authenticator.parser.core.user.exception.UserTokenParsingException;
+import com.bncrypted.authenticator.parser.core.user.exception.UserTokenException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
@@ -53,7 +52,7 @@ public class UserRequestAuthoriser<T extends User> implements RequestAuthoriser<
     private T getTokenDetails(String token) {
         try {
             return userResolver.getTokenDetails(token);
-        } catch (UserTokenInvalidException | UserTokenParsingException ex) {
+        } catch (UserTokenException ex) {
             throw new BearerTokenInvalidException(ex);
         }
     }
