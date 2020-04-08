@@ -6,6 +6,8 @@ import com.google.common.base.Ticker;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.google.common.util.concurrent.UncheckedExecutionException;
+import lombok.SneakyThrows;
 
 import java.util.concurrent.TimeUnit;
 
@@ -25,8 +27,13 @@ public class CachingSubjectResolver<T extends Subject> implements SubjectResolve
                 .build(CacheLoader.from(delegate::getTokenDetails));
     }
 
+    @SneakyThrows
     public T getTokenDetails(String token) {
-        return subjectCache.getUnchecked(token);
+        try {
+            return subjectCache.getUnchecked(token);
+        } catch (UncheckedExecutionException ex) {
+            throw ex.getCause();
+        }
     }
 
 }
