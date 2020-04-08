@@ -4,6 +4,7 @@ import com.bncrypted.authenticator.checker.core.RequestAuthoriser;
 import com.bncrypted.authenticator.checker.core.exception.AuthCheckerException;
 import com.bncrypted.authenticator.checker.core.model.User;
 import com.bncrypted.authenticator.checker.core.user.UserRequestAuthoriser;
+import com.bncrypted.authenticator.parser.core.user.exception.UserTokenException;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +28,7 @@ public class AuthCheckerUserFilter<T extends User> extends AbstractPreAuthentica
     private T authoriseUser(HttpServletRequest request) {
         try {
             return userRequestAuthoriser.authorise(request);
-        } catch (AuthCheckerException ex) {
+        } catch (AuthCheckerException | UserTokenException ex) {
             return null;
         }
     }
