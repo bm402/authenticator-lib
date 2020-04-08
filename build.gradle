@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.bncrypted"
-version = "1.0.4"
+version = "1.0.5"
 sourceCompatibility = "11"
 
 repositories {
