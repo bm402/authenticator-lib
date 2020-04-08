@@ -1,7 +1,6 @@
 package com.bncrypted.authenticator.checker.core.cache;
 
 import com.bncrypted.authenticator.checker.core.SubjectResolver;
-import com.bncrypted.authenticator.checker.core.exception.BearerTokenInvalidException;
 import com.bncrypted.authenticator.checker.core.model.Subject;
 import com.google.common.base.Ticker;
 import com.google.common.cache.CacheBuilder;
