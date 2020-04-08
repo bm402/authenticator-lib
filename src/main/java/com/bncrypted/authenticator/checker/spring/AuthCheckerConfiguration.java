@@ -7,6 +7,7 @@ import com.bncrypted.authenticator.checker.core.model.User;
 import com.bncrypted.authenticator.checker.core.user.UserRequestAuthoriser;
 import com.bncrypted.authenticator.checker.core.user.UserResolver;
 import com.bncrypted.authenticator.checker.spring.cache.CacheProperties;
+import com.bncrypted.authenticator.checker.spring.user.AuthCheckerUserFilter;
 import com.bncrypted.authenticator.parser.core.model.UserTokenDetails;
 import com.bncrypted.authenticator.parser.core.user.UserTokenParser;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -49,6 +50,16 @@ public class AuthCheckerConfiguration {
                                                          Function<HttpServletRequest, Optional<String>> userIdExtractor,
                                                          Function<HttpServletRequest, Collection<String>> authorizedRolesExtractor) {
         return new UserRequestAuthoriser<>(userResolver, userIdExtractor, authorizedRolesExtractor);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(name = "authCheckerUserFilter")
+    public AuthCheckerUserFilter authCheckerUserFilter(RequestAuthoriser<User> userAuthClient,
+                                                       AuthenticationManager authenticationManager) {
+
+        AuthCheckerUserFilter filter = new AuthCheckerUserFilter<>(userAuthClient);
+        filter.setAuthenticationManager(authenticationManager);
+        return filter;
     }
 
     @Bean

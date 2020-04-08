@@ -1,9 +1,7 @@
 package com.bncrypted.authenticator.checker.spring.user;
 
-import com.bncrypted.authenticator.checker.core.RequestAuthoriser;
 import com.bncrypted.authenticator.checker.core.SubjectResolver;
 import com.bncrypted.authenticator.checker.core.model.User;
-import com.bncrypted.authenticator.checker.spring.AuthCheckerConfiguration;
 import com.bncrypted.authenticator.checker.spring.helper.UserResolverHelper;
 import com.google.common.collect.ImmutableSet;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -58,15 +55,6 @@ public class UserTokenTestApplication {
         @Bean
         public SubjectResolver<User> userResolver() {
             return new UserResolverHelper();
-        }
-
-        @Bean
-        public AuthCheckerUserFilter authCheckerUserFilter(RequestAuthoriser<User> userAuthClient,
-                                                           AuthenticationManager authenticationManager) {
-
-            AuthCheckerUserFilter filter = new AuthCheckerUserFilter<>(userAuthClient);
-            filter.setAuthenticationManager(authenticationManager);
-            return filter;
         }
 
     }

@@ -5,10 +5,11 @@ plugins {
 	id "jacoco"
 	id "io.freefair.lombok" version "5.0.0-rc6"
     id "org.sonarqube" version "2.8"
+	id "com.github.johnrengelman.shadow" version "5.2.0"
 }
 
 group = "com.bncrypted"
-version = "1.0.0"
+version = "1.0.1"
 sourceCompatibility = "11"
 
 repositories {
@@ -28,6 +29,15 @@ dependencies {
 	testImplementation "org.eclipse.jetty:jetty-servlet:9.4.27.v20200227"
 	testImplementation "com.github.tomakehurst:wiremock:2.26.3"
 	testImplementation "org.mockito:mockito-core:3.3.3"
+}
+
+jar {
+	enabled false
+	finalizedBy shadowJar
+}
+
+shadowJar {
+	archiveFileName.set("authenticator-lib-" + this.version + ".jar")
 }
 
 test {
