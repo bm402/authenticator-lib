@@ -10,9 +10,4 @@ public class CacheProperties {
     private int ttlInSeconds;
     private int maximumSize;
 
-    public CacheProperties() {
-        this.ttlInSeconds = 0;
-        this.maximumSize = 0;
-    }
-
 }
