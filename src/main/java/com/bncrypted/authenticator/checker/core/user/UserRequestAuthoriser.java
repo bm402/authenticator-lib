@@ -30,6 +30,23 @@ public class UserRequestAuthoriser<T extends User> implements RequestAuthoriser<
         this.authorisedRolesExtractor = authorisedRolesExtractor;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * This implementation requires an Authorization HTTP header to be provided
+     * which contains a bearer token. The bearer token should contain the user ID
+     * and associated roles of the user trying to access the resource.
+     *
+     * The token is verified using a {@link UserResolver}, and the user-based and
+     * role-based access conditions defined in the {@link #userIdExtractor} and
+     * {@link #authorisedRolesExtractor} configuration are evaluated.
+     *
+     * If the user meets these conditions, the user is authenticated and their
+     * details are returned. Otherwise, an exception is thrown.
+     *
+     * @param  request a HTTP servlet request
+     * @return the user ID and associated roles of the authorised user
+     */
     public T authorise(HttpServletRequest request) {
         String token = request.getHeader(AUTHORISATION);
         if (token == null) {
