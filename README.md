@@ -2,7 +2,6 @@
 
 [![GitHub Actions Status](https://github.com/bncrypted/authenticator-lib/workflows/build/badge.svg)](https://github.com/bncrypted/authenticator-api/actions?query=workflow%3Abuild)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bncrypted_authenticator-lib&metric=alert_status)](https://sonarcloud.io/dashboard?id=bncrypted_authenticator-lib)
-[![Package Registry Status](http://img.shields.io/badge/github%20package%20registry-published-brightgreen)](https://github.com/bncrypted/authenticator-lib/packages)
 
 A library for configuring JWT-based HTTP authentication for Spring Boot applications using Spring Security:
 - provides coarse-grained user and role-based access control which can be customised based on the needs of
@@ -15,15 +14,20 @@ necessary
 
 ## Securing a Spring Boot application
 
-The library provides an authentication filter which can be used to determine whether the holder of an authentication
-token has access to a particular resource. This filter can be configured based on the needs of the application.
+### Importing the Authenticator library
+
+The library is published on the GitHub Package Registry, and can be imported into your application using Maven
+or Gradle as required.
+
+[https://github.com/bncrypted/authenticator-lib/packages](https://github.com/bncrypted/authenticator-lib/packages)
 
 ### Configuring the filter
 
-The filter can be configured by initialising two extractor beans: one for defining which users can access the resource
-and another for defining which roles can access the resource. The resource is described by the HTTP request, so the
-extractors can only use information in the request (eg. URI, HTTP headers) to determine which users/roles should be
-able to access that resource.
+The library provides an authentication filter which can be used to determine whether the holder of an authentication
+token has access to a particular resource. This filter can be configured by initialising two extractor beans: one
+for defining which users can access the resource and another for defining which roles can access the resource. The
+resource is described by the HTTP request, so the extractors can only use information in the request (eg. URI, HTTP
+headers) to determine which users/roles should be able to access that resource.
 
 ```java
 @Configuration
