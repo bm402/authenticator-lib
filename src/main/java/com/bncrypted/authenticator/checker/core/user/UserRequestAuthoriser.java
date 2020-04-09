@@ -44,7 +44,7 @@ public class UserRequestAuthoriser<T extends User> implements RequestAuthoriser<
      * If the user meets these conditions, the user is authenticated and their
      * details are returned. Otherwise, an exception is thrown.
      *
-     * @param  request a HTTP servlet request
+     * @param request a HTTP servlet request
      * @return the user ID and associated roles of the authorised user
      */
     public T authorise(HttpServletRequest request) {

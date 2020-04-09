@@ -10,8 +10,8 @@ public interface RequestAuthoriser<T extends Subject> {
      * Decides whether or not the request is authorised to access a
      * given resource.
      *
-     * @param  request a HTTP servlet request
-     * @return         the identity of an authorised subject
+     * @param request a HTTP servlet request
+     * @return the identity of an authorised subject
      */
     T authorise(HttpServletRequest request);
 
