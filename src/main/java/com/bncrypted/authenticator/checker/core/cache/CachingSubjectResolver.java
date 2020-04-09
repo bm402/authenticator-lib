@@ -27,6 +27,15 @@ public class CachingSubjectResolver<T extends Subject> implements SubjectResolve
                 .build(CacheLoader.from(delegate::getTokenDetails));
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * This implementation identifies a subject from the token using a LoadingCache
+     * and a {@link SubjectResolver} delegate.
+     *
+     * @return the cached subject of the token
+     * @see LoadingCache
+     */
     @SneakyThrows
     public T getTokenDetails(String token) {
         try {

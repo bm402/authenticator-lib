@@ -25,6 +25,16 @@ public class HttpClientBasedUserTokenParser<T> implements UserTokenParser<T> {
         this.type = type;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * This implementation uses the Authenticator API to verify the token and extract
+     * the user details. It uses a HttpClient to make a call to the API, the location
+     * of which can be configured in the application properties.
+     *
+     * @throws UserTokenParsingException if the token is invalid or has expired
+     * @see HttpClient
+     */
     public T parse(String token) {
         if (token.startsWith("Bearer ")) {
             token = token.substring(7);

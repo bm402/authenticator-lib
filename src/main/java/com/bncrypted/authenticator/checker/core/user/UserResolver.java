@@ -13,6 +13,14 @@ public class UserResolver implements SubjectResolver<User> {
         this.userTokenParser = userTokenParser;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * This implementation identifies a user and their associated roles from
+     * the token using a {@link UserTokenParser}.
+     *
+     * @return the {@link User} that is the subject of the token
+     */
     public User getTokenDetails(String token) {
         UserTokenDetails details = userTokenParser.parse(token);
         return new User(details.getId(), details.getRoles());
