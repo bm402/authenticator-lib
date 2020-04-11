@@ -1,9 +1,9 @@
 # Authenticator library
 
-[![GitHub Actions Status](https://github.com/bncrypted/authenticator-lib/workflows/build/badge.svg)](https://github.com/bncrypted/authenticator-api/actions?query=workflow%3Abuild)
+[![GitHub Actions Status](https://github.com/bncrypted/authenticator-lib/workflows/build/badge.svg)](https://github.com/bncrypted/authenticator-lib/actions?query=workflow%3Abuild)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bncrypted_authenticator-lib&metric=alert_status)](https://sonarcloud.io/dashboard?id=bncrypted_authenticator-lib)
 
-A library for configuring JWT-based HTTP authentication for Spring Boot applications using Spring Security:
+A library for configuring JWT-based user authentication for Spring Boot applications using Spring Security:
 - provides coarse-grained user and role-based access control which can be customised based on the needs of
 the application
 - uses the [Authenticator API](https://github.com/bncrypted/authenticator-api) to manage authentication
